@@ -55,7 +55,7 @@ def complement_RNA(dna):
 #RNA Protein sequence code (Translation)
 def codon_list(rna):
     """
-    Inputs an RNA string consisting of A, U, G, C characters. Returns a list of proteins that would result from translating the RNA sequence into a primary-structure.
+    Inputs an RNA string consisting of A, U, G, C characters. Returns a list of codons that would result from translating the RNA sequence into a primary-structure.
     """
     codon_list = []
     start = 0
