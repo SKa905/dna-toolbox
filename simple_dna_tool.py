@@ -57,7 +57,6 @@ def codon_list(rna):
     """
     Inputs an RNA string consisting of A, U, G, C characters. Returns a list of proteins that would result from translating the RNA sequence into a primary-structure.
     """
-    rna = ''.join(rna)
     codon_list = []
     start = 0
     for i in range(0, len(rna), 3):
