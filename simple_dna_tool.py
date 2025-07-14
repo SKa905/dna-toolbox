@@ -1,8 +1,6 @@
 #Complementary DNA sequence code (DNA Replication)
-#NOTE - In the future want to add a feature that adds all instances of nucleotides that aren't A/C/U/G into a list with the respective positions
-# of each error. Then I can add as part of my error message the positions of ALL instances of errors not just the first one that pops up.
-# This logic will likely apply to the complement_RNA code as well.
 dna_seq = input("Paste the DNA sequence you'd like to analyze here: ")
+
 def complement_DNA(dna):
     """
     Inputs a DNA string consisting of A, C, T, G characters. Returns a list consisting of a complement DNA sequence, or Error messages showing positions at which input string doesn't consist of A, C, T, or G characters.
@@ -28,9 +26,7 @@ def complement_DNA(dna):
     else:
         return complement_list
     
-
 #Complementary RNA sequence code (Transcription)
-#NOTE - See complement_DNA comment
 def complement_RNA(dna):
     """
     Inputs a DNA string consisting of A, C, T, G characters. Returns a list consisting of a complement RNA sequence, or Error messages showing positions at which input string doesn't consist of A, C, T, or G characters.
@@ -54,17 +50,40 @@ def complement_RNA(dna):
     if error_flag:
         return (f"Error. Your DNA sequence has a nucleotide that doesn't exist at positions: {error_list}.\nMake sure it consists of either A, C, G, or T nucleotides.")
     else:
-        return complement_list
+        return ''.join(complement_list)
 
 #RNA Protein sequence code (Translation)
-def translate(rna):
+def codon_list(rna):
     """
     Inputs an RNA string consisting of A, U, G, C characters. Returns a list of proteins that would result from translating the RNA sequence into a primary-structure.
     """
     rna = ''.join(rna)
-    translate_list = []
+    codon_list = []
+    start = 0
     for i in range(0, len(rna), 3):
-        translate_list.append(rna[i:i+3])
-    return translate_list
+        codon_list.append(rna[i:i+3])
+    for e in range(len(codon_list)):
+        if codon_list[e] == "AUG":
+            start += e
+            break
+    return codon_list[start:]   
 
-print(translate(complement_RNA(dna_seq)))
+def start_codon(rna):
+    """
+    Inputs an RNA string of A, U, G, C characters. Returns an integer, telling at what position (1 being the very first nucleotide) the start codon begins at.
+    """
+    rna = ''.join(rna)
+    codon_list = []
+    start_number = 1
+    for i in range(0, len(rna), 3):
+        codon_list.append(rna[i:i+3])
+    for i in range(len(codon_list)):
+        if codon_list[i] == "AUG":
+            start_number = (3*i)
+            break
+    return start_number+1
+
+print(f"\n--------------\nOriginal DNA sequence: {dna_seq}\n--------------")
+print(f"Transcribed RNA sequence: {complement_RNA(dna_seq)}")
+print(f"Start codon begins at position {start_codon(complement_RNA(dna_seq))}\n--------------")
+print(f"Codon list to be translated: {codon_list(complement_RNA(dna_seq))}\n--------------")
