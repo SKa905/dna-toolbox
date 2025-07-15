@@ -55,27 +55,35 @@ def complement_RNA(dna):
 #RNA Protein sequence code (Translation)
 def start_codon(rna):
     """
-    Inputs an RNA string of A, U, G, C characters. Returns an integer, telling at what position (1 being the very first nucleotide) the start codon begins at.
+    Inputs an RNA string or list of A, U, G, C characters. Returns an integer, telling at what position (1 being the very first nucleotide) the start codon begins at.
     """
     rna = ''.join(rna)
     for i in range(len(rna)):
         if rna[i:i+3] == "AUG":
             return i+1
+    return "Error! There is no start codon present in this DNA sequence."
 
 def codon_list(rna):
     """
-    Inputs an RNA string consisting of A, U, G, C characters. Returns a list of codons that would result from translating the RNA sequence into a primary-structure.
+    Inputs an RNA string or list consisting of A, U, G, C characters. Returns a list of codons that would result from translating the RNA sequence into a primary-structure.
     """
     codon_list = []
-    for i in range(start_codon(rna)-1, len(rna), 3): # type: ignore
-        codon_list.append(rna[i:i+3])
-    return codon_list
+    if type(start_codon(rna)) != int:
+        return "N/A"
+    else:
+        for i in range(start_codon(rna)-1, len(rna), 3): # type: ignore
+            codon_list.append(rna[i:i+3])
+        if len(codon_list[-1]) < 3:
+            del (codon_list[-1])
+        return codon_list
 
+
+#OUTPUT CODE
 print(f"--------------\nAssuming DNA is being replicated by DNA Polymerase:")
 print(f"Original DNA sequence: {dna_seq}")
 print(f"Complement DNA strand: {complement_DNA(dna_seq)}\n--------------")
 
 print(f"Assuming DNA will eventually become a protein sequence:")
 print(f"Original DNA sequence: {dna_seq}")
-print(f"Transcribed RNA sequence: {complement_RNA(dna_seq)}.\nStart codon begins at position {start_codon(complement_RNA(dna_seq))}")
+print(f"Transcribed RNA sequence: {complement_RNA(dna_seq)}.\nStart codon begins at position: {start_codon(complement_RNA(dna_seq))}")
 print(f"Codon list to be translated: {codon_list(complement_RNA(dna_seq))}\n--------------")
