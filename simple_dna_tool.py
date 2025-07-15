@@ -79,11 +79,11 @@ def codon_list(rna):
 
 
 #OUTPUT CODE
-print(f"--------------\nAssuming DNA is being replicated by DNA Polymerase:")
-print(f"Original DNA sequence: {dna_seq}")
-print(f"Complement DNA strand: {complement_DNA(dna_seq)}\n--------------")
+print(f"--------------\nAssuming DNA is being replicated by DNA Polymerase:\n")
+print(f"Original DNA sequence: \n{dna_seq}\n")
+print(f"Complement DNA strand: \n{complement_DNA(dna_seq)}\n--------------")
 
-print(f"Assuming DNA will eventually become a protein sequence:")
-print(f"Original DNA sequence: {dna_seq}")
-print(f"Transcribed RNA sequence: {complement_RNA(dna_seq)}.\nStart codon begins at position: {start_codon(complement_RNA(dna_seq))}")
-print(f"Codon list to be translated: {codon_list(complement_RNA(dna_seq))}\n--------------")
+print(f"Assuming DNA will eventually become a protein sequence:\n")
+print(f"Original DNA sequence: \n{dna_seq}\n")
+print(f"Transcribed RNA sequence: \n{complement_RNA(dna_seq)}.\nStart codon begins at position: {start_codon(complement_RNA(dna_seq))}\n")
+print(f"Codon list to be translated: \n{codon_list(complement_RNA(dna_seq))}\n--------------")
